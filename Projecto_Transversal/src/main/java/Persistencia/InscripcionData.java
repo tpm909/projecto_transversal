@@ -27,6 +27,9 @@ public class InscripcionData {
     
     // Constructor
     public InscripcionData() {
+        this.con = Conexion.getConexion();
+        this.aluData = new AlumnoData();
+        this.matData = new MateriaData();
     }
 
     public InscripcionData(Connection conexion, MateriaData matData, AlumnoData aluData) {
