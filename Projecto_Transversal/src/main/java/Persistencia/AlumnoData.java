@@ -248,6 +248,34 @@ public class AlumnoData {
                 System.out.println("Ocurrio un error al acceder a la tabla Alumno ");
             }
         }
-        
+    
+    public Alumno obtenerAlumnoPorId(int id) {
+        Alumno alumno = null;
+        String sql = "SELECT * FROM alumno WHERE id_alumno = ?";
+
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                alumno = new Alumno();
+                alumno.setId_alumno(rs.getInt("id_alumno"));
+                alumno.setNombre(rs.getString("nombre"));
+                alumno.setApellido(rs.getString("apellido"));
+                alumno.setDni(rs.getInt("dni"));
+                alumno.setFecha_nacimiento(rs.getDate("fecha_nacimiento").toLocalDate());
+                alumno.setEmail(rs.getString("email"));
+                alumno.setTelefono(rs.getLong("telefono"));
+                alumno.setEstado(rs.getBoolean("estado"));
+            }
+
+            ps.close();
+        } catch (SQLException ex) {
+            System.out.println("Error al obtener el alumno: " + ex.getMessage());
+        }
+
+        return alumno;
+    }   
     
 }

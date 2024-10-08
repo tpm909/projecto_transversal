@@ -208,6 +208,29 @@ public class MateriaData {
             System.out.println("Error al dar de alta la materia: " + e.getMessage());
         }
     }
-    
+    public Materia obtenerMateriaPorId(int id) {
+        Materia materia = null;
+        String sql = "SELECT * FROM materia WHERE id_materia = ?";
+
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                materia = new Materia();
+                materia.setId_materia(rs.getInt("id_materia"));
+                materia.setNombre_materia(rs.getString("nombre_materia"));
+                materia.setYear(rs.getString("year"));
+                
+            }
+
+            ps.close();
+        } catch (SQLException ex) {
+            System.out.println("Error al obtener la materia: " + ex.getMessage());
+        }
+
+        return materia;
+    }
     
 }
