@@ -54,16 +54,11 @@ public class menu_principal extends javax.swing.JFrame {
         );
 
         jMenu1.setText("Alumnos");
-        jMenu1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenu1ActionPerformed(evt);
-            }
-        });
 
-        jMenuItem2.setText("Alumno");
+        jMenuItem2.setText("Administrar");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                abrir_menu(evt);
             }
         });
         jMenu1.add(jMenuItem2);
@@ -100,19 +95,14 @@ public class menu_principal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
-    
-    // TODO add your handling code here:
-    }//GEN-LAST:event_jMenu1ActionPerformed
-
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    private void abrir_menu(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abrir_menu
        fondo.removeAll();
     fondo.repaint();
     VistaAlumno A = new VistaAlumno();
-    B.setVisible(rootPaneCheckingEnabled);
+    A.setVisible(rootPaneCheckingEnabled);
     fondo.add(A);
     fondo.moveToFront(A); // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    }//GEN-LAST:event_abrir_menu
 
     /**
      * @param args the command line arguments
