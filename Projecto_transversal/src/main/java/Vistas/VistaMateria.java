@@ -16,7 +16,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class VistaMateria extends javax.swing.JInternalFrame {
 
-    DefaultTableModel Mtabla = new DefaultTableModel(new Object[]{"Nombre", "Año", "Estado"}, 0);
+    DefaultTableModel Mtabla = new DefaultTableModel(new Object[]{"Nombre", "Año", "Estado","ID"}, 0);
     MateriaData datos = new MateriaData();
 
     /**
@@ -29,17 +29,18 @@ public class VistaMateria extends javax.swing.JInternalFrame {
     }
 
     public void borrar() {
-        tabla.removeAll();
+        Mtabla = new DefaultTableModel(new Object[]{"Nombre", "Año", "Estado","ID"}, 0);
+    tabla.setModel(Mtabla);
     }
 
     public void cargarlista(List<Materia> listarMateria) {
        borrar();
         for (Materia m : listarMateria) {
-            Mtabla.addRow(new Object[]{m.getNombre_materia(), m.getYear(), m.isEstado()});
+            Mtabla.addRow(new Object[]{m.getNombre_materia(), m.getYear(), m.isEstado(),m.getId_materia()});
         }
     }
 
-    public void filtro_nombre(List<Materia> lista) {//filtro nombre
+   /** public void filtro_nombre(List<Materia> lista) {//filtro nombre
         ArrayList<Materia> list = new ArrayList();
         for (Materia m : lista) {
             if (m.getNombre_materia().toLowerCase().contains(nombre.getText().toLowerCase())) {
@@ -49,11 +50,23 @@ public class VistaMateria extends javax.swing.JInternalFrame {
             }
         }
     cargarlista(list);
-    }
+    }*/
 
+   public void agregar (){
+       Materia m = new Materia(nombre.getText(),(String)box.getSelectedItem(),estado.isSelected());
+      
+         datos.agregarMateria(m);
+         Mtabla.addRow(new Object[]{m.getNombre_materia(), m.getYear(), m.isEstado(),m.getId_materia()});
+   }
+    
+   public void actualizar (){
+      
+         datos.modificarMateria((Integer)codigo.getValue(),nombre.getText(),(String)box.getSelectedItem(),estado.isSelected());
+         borrar();
+         cargarlista(datos.listarMateria());
+   }
+    
    
-    
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -66,11 +79,12 @@ public class VistaMateria extends javax.swing.JInternalFrame {
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jToggleButton1 = new javax.swing.JToggleButton();
         jYearChooser1 = new com.toedter.calendar.JYearChooser();
+        code = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
         actualizar = new javax.swing.JButton();
         nombre = new javax.swing.JTextField();
-        jRadioButton1 = new javax.swing.JRadioButton();
+        estado = new javax.swing.JRadioButton();
         ingresar = new javax.swing.JButton();
         borra = new javax.swing.JButton();
         box = new javax.swing.JComboBox<>();
@@ -78,8 +92,16 @@ public class VistaMateria extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        codigo = new javax.swing.JSpinner();
 
         jToggleButton1.setText("jToggleButton1");
+
+        code.setText("Codigo");
+        code.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                codeMouseClicked(evt);
+            }
+        });
 
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -111,14 +133,24 @@ public class VistaMateria extends javax.swing.JInternalFrame {
 
         nombre.setText("mate");
 
-        jRadioButton1.setSelected(true);
-        jRadioButton1.setText("jRadioButton1");
+        estado.setSelected(true);
+        estado.setText("Activo");
 
         ingresar.setText("ingresar");
+        ingresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ingresarActionPerformed(evt);
+            }
+        });
 
         borra.setText("Actualizar");
+        borra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                borraActionPerformed(evt);
+            }
+        });
 
-        box.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        box.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Primero", "Segundo", "Tercero", "Cuarto", "Quinto", "Sexto" }));
 
         jLabel1.setText("Nombre");
 
@@ -127,6 +159,8 @@ public class VistaMateria extends javax.swing.JInternalFrame {
         jLabel3.setText("Año");
 
         jLabel4.setText("Estado");
+
+        codigo.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -137,28 +171,33 @@ public class VistaMateria extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 62, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE))
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE))
+                                        .addGap(0, 0, Short.MAX_VALUE)))
                                 .addGap(13, 13, 13)
                                 .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGap(88, 88, 88)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jRadioButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(ingresar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(borra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(actualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(estado, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(box, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(38, 38, 38))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(borra)
+                                .addGap(18, 18, 18)
+                                .addComponent(codigo))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(actualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(ingresar, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -176,15 +215,17 @@ public class VistaMateria extends javax.swing.JInternalFrame {
                     .addComponent(jLabel3))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton1)
+                    .addComponent(estado)
                     .addComponent(jLabel4))
+                .addGap(13, 13, 13)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(actualizar)
+                    .addComponent(ingresar))
                 .addGap(18, 18, 18)
-                .addComponent(ingresar)
-                .addGap(18, 18, 18)
-                .addComponent(borra)
-                .addGap(18, 18, 18)
-                .addComponent(actualizar)
-                .addGap(44, 44, 44))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(borra)
+                    .addComponent(codigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(90, 90, 90))
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 12, Short.MAX_VALUE))
@@ -195,23 +236,39 @@ public class VistaMateria extends javax.swing.JInternalFrame {
 
     private void actualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actualizarActionPerformed
 
-        
-        
+        datos.eliminarMateria((Integer)codigo.getValue());
+        borrar();
+         cargarlista(datos.listarMateria());
         
     }//GEN-LAST:event_actualizarActionPerformed
+
+    private void ingresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ingresarActionPerformed
+    agregar();
+    // TODO add your handling code here:
+    }//GEN-LAST:event_ingresarActionPerformed
+
+    private void codeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_codeMouseClicked
+     code.setText("");   // TODO add your handling code here:
+    }//GEN-LAST:event_codeMouseClicked
+
+    private void borraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borraActionPerformed
+       actualizar(); // TODO add your handling code here:
+    }//GEN-LAST:event_borraActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton actualizar;
     private javax.swing.JButton borra;
     private javax.swing.JComboBox<String> box;
+    private javax.swing.JTextField code;
+    private javax.swing.JSpinner codigo;
+    private javax.swing.JRadioButton estado;
     private javax.swing.JButton ingresar;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JToggleButton jToggleButton1;
     private com.toedter.calendar.JYearChooser jYearChooser1;

@@ -209,5 +209,22 @@ public class MateriaData {
         }
     }
     
+     public void eliminarMateria(int id){ //No es recomendable borrar con el DELETE, despues no podemos recuperar los datos
+        try{
+            String sql = "DELETE FROM materia WHERE id_Materia = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id); // Reemplazamos el valor de la consulta (?)
+            int fila = ps.executeUpdate(); //Si se encuentra un materia con ese ID, Me va a mostrar la cantidad de filas afectadas, En este caso me deberia dar 1
+            
+            if(fila == 1){ //Si se encuentra, se eliminara
+                System.out.println("El materia fue eliminado de forma permanente correctamente! ");
+            }else{
+                System.out.println("No se encontro ningun materia con el ID: "+id ); 
+            }
+            
+            }catch(SQLException ex){
+                System.out.println("Ocurrio un error al acceder a la tabla materia ");
+            }
+        }
     
 }
