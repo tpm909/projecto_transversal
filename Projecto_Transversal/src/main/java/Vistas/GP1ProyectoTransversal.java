@@ -292,7 +292,7 @@ public class GP1ProyectoTransversal{
                     // Dar de baja materia
                         System.out.print("Ingrese el nombre de la materia que desea dar de baja: ");
                         String nombreBaja = entrada.nextLine();
-                        materiaData.darDeBajaMateria(nombreBaja);
+                       /* materiaData.darDeBajaMateria(nombreBaja);*/
                         System.out.println("Materia dada de baja.");
                         break;
 
@@ -301,7 +301,7 @@ public class GP1ProyectoTransversal{
                     // Dar de alta materia
                         System.out.print("Ingrese el nombre de la materia que desea dar de alta: ");
                         String nombreAlta = entrada.nextLine();
-                        materiaData.darDeAltaMateria(nombreAlta);
+                        //materiaData.darDeAltaMateria(nombreAlta);
                         System.out.println("Materia dada de alta.");
                         break;
 

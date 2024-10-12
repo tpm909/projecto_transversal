@@ -151,8 +151,8 @@ public class MateriaData {
         return listarMateria;
     }
     
-    public void darDeBajaMateria(String nombre_materia) { 
-    String sql = "UPDATE materia SET estado = ? WHERE nombre_materia = ?";
+    public void darDeBajaMateria(int id) { 
+    String sql = "UPDATE materia SET estado = ? WHERE id_Materia = ?";
     
         try {
             // Preparar la declaración SQL
@@ -162,7 +162,7 @@ public class MateriaData {
             ps.setBoolean(1, false);  // o puedes usar ps.setInt(1, 0);
         
             // Establecer el id de la materia para identificarlo
-            ps.setString(2, nombre_materia);
+            ps.setInt(2, id);
         
             // Ejecutar la actualización
             int filasAfectadas = ps.executeUpdate();
@@ -180,8 +180,8 @@ public class MateriaData {
         }
     }
     
-    public void darDeAltaMateria(String nombre_materia) { 
-    String sql = "UPDATE materia SET estado = ? WHERE nombre_materia = ?";
+    public void darDeAltaMateria(int id) { 
+    String sql = "UPDATE materia SET estado = ? WHERE id_materia = ?";
     
         try {
             // Preparar la declaración SQL
@@ -191,7 +191,7 @@ public class MateriaData {
             ps.setBoolean(1, true);  // o puedes usar ps.setInt(1, 0);
         
             // Establecer el id de la materia para identificarlo
-            ps.setString(2, nombre_materia);
+            ps.setInt(2, id);
         
             // Ejecutar la actualización
             int filasAfectadas = ps.executeUpdate();
