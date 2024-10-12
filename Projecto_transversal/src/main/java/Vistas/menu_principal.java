@@ -14,6 +14,7 @@ public class menu_principal extends javax.swing.JFrame {
      * Creates new form menu_principal
      */
     public menu_principal() {
+        
         initComponents();
     }
 
@@ -46,7 +47,7 @@ public class menu_principal extends javax.swing.JFrame {
         fondo.setLayout(fondoLayout);
         fondoLayout.setHorizontalGroup(
             fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 458, Short.MAX_VALUE)
+            .addGap(0, 915, Short.MAX_VALUE)
         );
         fondoLayout.setVerticalGroup(
             fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -68,6 +69,11 @@ public class menu_principal extends javax.swing.JFrame {
         jMenu2.setText("Materias");
 
         jMenuItem4.setText("Administrar");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem4);
 
         jMenuBar1.add(jMenu2);
@@ -81,9 +87,7 @@ public class menu_principal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(fondo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(fondo)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -103,6 +107,15 @@ public class menu_principal extends javax.swing.JFrame {
     fondo.add(A);
     fondo.moveToFront(A); // TODO add your handling code here:
     }//GEN-LAST:event_abrir_menu
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+          fondo.removeAll();
+    fondo.repaint();
+    VistaMateria A = new VistaMateria();
+    A.setVisible(rootPaneCheckingEnabled);
+    fondo.add(A);
+    fondo.moveToFront(A);  // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     /**
      * @param args the command line arguments
