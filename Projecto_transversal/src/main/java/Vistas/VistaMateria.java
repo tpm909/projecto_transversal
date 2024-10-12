@@ -32,6 +32,7 @@ public class VistaMateria extends javax.swing.JInternalFrame {
     public void borrar() {
         Mtabla = new DefaultTableModel(new Object[]{"Nombre", "Año", "Estado","ID"}, 0);
     tabla.setModel(Mtabla);
+    tabla.setDefaultEditor(Object.class, null);
     }
 
     public void cargarlista(List<Materia> listarMateria) {

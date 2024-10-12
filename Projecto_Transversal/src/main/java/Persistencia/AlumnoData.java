@@ -166,7 +166,7 @@ public class AlumnoData {
 
     
     public void darDeBajaAlumno(int dni) { 
-    String sql = "UPDATE alumno SET estado = ? WHERE dni = ?";
+    String sql = "UPDATE alumno SET estado = ? WHERE id_alumno = ?";
     
     try {
         // Preparar la declaración SQL
