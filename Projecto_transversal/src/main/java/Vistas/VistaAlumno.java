@@ -28,7 +28,7 @@ AlumnoData datos = new AlumnoData();
      public void cargarlista(List<Alumno> listarMateria) {
        borrar();
         for (Alumno m : listarMateria) {
-            tabla.addRow(new Object[]{m.getId_alumno(),m.getNombre(), m.getApellido(), m.getDni(),m.getFecha_nacimiento(),m.getTelefono(),m.getEmail(),m.isEstado()});
+            tabla.addRow(new Object[]{m.getId_alumno(),m.getNombre(), m.getApellido(), m.getDni(),m.getFecha_nacimiento(),m.getEmail(),m.getTelefono(),m.isEstado()});
         }
     }
     
