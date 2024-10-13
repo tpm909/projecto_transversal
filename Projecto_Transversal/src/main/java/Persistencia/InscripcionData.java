@@ -177,15 +177,14 @@ public class InscripcionData {
         }
 
         return materias;
-    }
+    }   
 
-    public void borrarInscripcionMateriaAlumno(int id_alumno, int id_materia) {
-        String sql = "DELETE FROM inscripcion WHERE id_alumno = ? AND id_materia = ?";
+    public void borrarInscripcionMateriaAlumno(int id_inscripcion) {
+        String sql = "DELETE FROM inscripcion WHERE id_inscripcion = ?";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, id_alumno);
-            ps.setInt(2, id_materia);
+            ps.setInt(1, id_inscripcion);
             ps.executeUpdate();
             ps.close();
         } catch (SQLException ex) {

@@ -17,6 +17,11 @@ public class Inscripcion {
     private LocalDate fecha_inscripcion;
     private double nota;
 
+    @Override
+    public String toString() {
+        return String.valueOf(idInscripcion);
+    }
+
     // Constructor con todos los atributos
     public Inscripcion(int idInscripcion, Alumno alumno, Materia materia,LocalDate fecha_inscripcion, double nota) {
         this.idInscripcion = idInscripcion;

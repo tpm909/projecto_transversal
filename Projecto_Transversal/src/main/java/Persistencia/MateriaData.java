@@ -120,7 +120,7 @@ public class MateriaData {
     public List<Materia> listarMateria(){
         ArrayList<Materia> listarMateria = new ArrayList<>();
         
-        String sql = "SELECT * FROM Materia";
+        String sql = "SELECT * FROM materia";
         
         try {
             // Preparar la consulta

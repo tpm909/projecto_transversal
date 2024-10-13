@@ -82,7 +82,7 @@ public class Materia {
     }
      @Override
     public String toString() {
-        return id_materia + " " + nombre_materia + " " + year;
+        return nombre_materia + " " + year;
     }
     
 }
