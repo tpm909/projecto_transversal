@@ -6,9 +6,12 @@ package Vistas;
 
 import Modelo.Alumno;
 import Persistencia.AlumnoData;
+
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 /**
  *
  * @author franco
@@ -39,13 +42,32 @@ AlumnoData datos = new AlumnoData();
         tablacosa.setDefaultEditor(Object.class, null);
     }
      
+    
+    
+    
     public void agregar (){
-       
+     Date selectedDate = fecha.getDate();
+ LocalDate fechaNacimiento = selectedDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+          
+ Alumno a = new Alumno(nombre.getText(),apellido.getText(),Integer.parseInt(Dni.getText()),fechaNacimiento,email.getText(),Long.parseLong(telefono.getText()),estado.isSelected());
+ datos.agregarAlumno(a);
+borrar();
+cargarlista(datos.listarAlumno());
+        
+    }
+    
+    public void actualizar (){
+         Date selectedDate = fecha.getDate();
+ LocalDate fechaNacimiento = selectedDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+          
+ 
+ datos.modificarAlumno((Integer)code.getValue(),nombre.getText(),apellido.getText(),Integer.parseInt(Dni.getText()),fechaNacimiento,email.getText(),Long.parseLong(telefono.getText()),estado.isSelected());
+borrar();
+cargarlista(datos.listarAlumno()); 
         
         
         
     }
-    
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -131,8 +153,18 @@ AlumnoData datos = new AlumnoData();
         jLabel6.setText("DNI");
 
         agragar.setText("Agregar");
+        agragar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                agragarActionPerformed(evt);
+            }
+        });
 
         actualizar.setText("Actualizar");
+        actualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                actualizarActionPerformed(evt);
+            }
+        });
 
         jLabel7.setText("Fecha");
 
@@ -161,8 +193,18 @@ AlumnoData datos = new AlumnoData();
         });
 
         jButton2.setText("Dar Baja");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Borrar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         code.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
 
@@ -270,6 +312,29 @@ datos.darDeAltaAlumno((Integer)code.getValue());
 borrar();
 cargarlista(datos.listarAlumno());// TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void agragarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agragarActionPerformed
+     
+agregar();
+   
+
+    }//GEN-LAST:event_agragarActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+      datos.darDeBajaAlumno((Integer)code.getValue()); 
+borrar();
+cargarlista(datos.listarAlumno());
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        datos.eliminarAlumno((Integer)code.getValue());
+        borrar();
+        cargarlista(datos.listarAlumno());        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void actualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actualizarActionPerformed
+     actualizar();    // TODO add your handling code here:
+    }//GEN-LAST:event_actualizarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

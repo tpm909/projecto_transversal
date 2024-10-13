@@ -165,7 +165,7 @@ public class AlumnoData {
     }
 
     
-    public void darDeBajaAlumno(int dni) { 
+    public void darDeBajaAlumno(int id) { 
     String sql = "UPDATE alumno SET estado = ? WHERE id_alumno = ?";
     
     try {
@@ -176,7 +176,7 @@ public class AlumnoData {
         ps.setBoolean(1, false);
         
         // Establecer el dni del alumno para identificarlo
-        ps.setInt(2, dni);
+        ps.setInt(2, id);
         
         // Ejecutar la actualización
         int filasAfectadas = ps.executeUpdate();
@@ -198,8 +198,8 @@ public class AlumnoData {
 }
 
     
-    public void darDeAltaAlumno(int dni) { 
-    String sql = "UPDATE alumno SET estado = ? WHERE dni = ?";
+    public void darDeAltaAlumno(int id) { 
+    String sql = "UPDATE alumno SET estado = ? WHERE id_alumno = ?";
     
     try {
         // Preparar la declaración SQL
@@ -209,7 +209,7 @@ public class AlumnoData {
         ps.setBoolean(1, true);
         
         // Establecer el dni del alumno para identificarlo
-        ps.setInt(2, dni);
+        ps.setInt(2, id);
         
         // Ejecutar la actualización
         int filasAfectadas = ps.executeUpdate();
@@ -233,7 +233,7 @@ public class AlumnoData {
     
     public void eliminarAlumno(int id){ //No es recomendable borrar con el DELETE, despues no podemos recuperar los datos
         try{
-            String sql = "DELETE FROM alumno WHERE idAlumno = ?";
+            String sql = "DELETE FROM alumno WHERE id_Alumno = ?";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id); // Reemplazamos el valor de la consulta (?)
             int fila = ps.executeUpdate(); //Si se encuentra un alumno con ese ID, Me va a mostrar la cantidad de filas afectadas, En este caso me deberia dar 1
