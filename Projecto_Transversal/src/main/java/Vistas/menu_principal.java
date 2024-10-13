@@ -36,7 +36,6 @@ public class menu_principal extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
-        jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
 
         jMenuItem1.setText("jMenuItem1");
@@ -53,7 +52,7 @@ public class menu_principal extends javax.swing.JFrame {
         );
         fondoLayout.setVerticalGroup(
             fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 424, Short.MAX_VALUE)
+            .addGap(0, 534, Short.MAX_VALUE)
         );
 
         jMenu1.setText("Alumnos");
@@ -86,14 +85,6 @@ public class menu_principal extends javax.swing.JFrame {
                 jMenu3ActionPerformed(evt);
             }
         });
-
-        jMenuItem5.setText("Nueva");
-        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem5ActionPerformed(evt);
-            }
-        });
-        jMenu3.add(jMenuItem5);
 
         jMenuItem3.setText("Inscripciones");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
@@ -156,16 +147,6 @@ public class menu_principal extends javax.swing.JFrame {
         fondo.moveToFront(vI);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
-    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        fondo.removeAll();
-        vistaNuevaInscripcion vNI = new vistaNuevaInscripcion();
-        vNI.setVisible(true);
-        fondo.add(vNI);
-        fondo.repaint();
-
-        fondo.moveToFront(vNI);
-    }//GEN-LAST:event_jMenuItem5ActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -212,6 +193,5 @@ public class menu_principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
     // End of variables declaration//GEN-END:variables
 }

@@ -6,6 +6,9 @@ package Vistas;
 
 import Modelo.Alumno;
 import Persistencia.AlumnoData;
+import com.toedter.calendar.JCalendar;
+import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -121,6 +124,11 @@ AlumnoData datos = new AlumnoData();
         jLabel6.setText("DNI");
 
         agragar.setText("Agregar");
+        agragar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                agragarActionPerformed(evt);
+            }
+        });
 
         actualizar.setText("Actualizar");
 
@@ -163,7 +171,7 @@ AlumnoData datos = new AlumnoData();
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE))
+                                .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -257,6 +265,10 @@ AlumnoData datos = new AlumnoData();
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void agragarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agragarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_agragarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

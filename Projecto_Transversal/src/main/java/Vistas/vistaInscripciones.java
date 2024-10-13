@@ -7,7 +7,6 @@ package Vistas;
 import Modelo.Inscripcion;
 import Persistencia.InscripcionData;
 import java.util.List;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -25,25 +24,26 @@ public class vistaInscripciones extends javax.swing.JInternalFrame {
     public vistaInscripciones() {
         initComponents();
         this.setTitle("Inscripciones");
-        lista = repo.obtenerInscripciones();
-        llenarTabla(lista);
-
+        jTable1.setDefaultEditor(Object.class, null);
+        jTable1.setSelectionMode(0);
+        actualizarTabla();
     }
 
-    private void doNothing() {
-        var tm = jTable1.getModel();
-        var x = jTable1.getSelectedRow();
-        var y = 0;
-        Inscripcion i = (Inscripcion) tm.getValueAt(x, y);
-        repo.borrarInscripcionMateriaAlumno(i.getIdInscripcion());
+    public void actualizarTabla() {
         lista = repo.obtenerInscripciones();
         llenarTabla(lista);
-        filtrar();
+    }
+
+    private Inscripcion getInscripcion() {
+        var tm = jTable1.getModel();
+        var x = jTable1.getSelectedRow();
+        return (Inscripcion) tm.getValueAt(x, 0);
     }
 
     private void llenarTabla(List<Inscripcion> inscripciones) {
-        var tm = new DefaultTableModel(new String[]{
-            "id", "Alumno", "Materia", "Nota"}, 0);
+        var tableHeader = new String[]{
+            "id", "Alumno", "Materia", "Nota"};
+        var tm = new DefaultTableModel(tableHeader, 0);
 
         inscripciones.forEach(inscripcion -> {
             tm.addRow(new Object[]{
@@ -86,10 +86,13 @@ public class vistaInscripciones extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButton1 = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+
+        jButton1.setText("jButton1");
 
         setResizable(true);
         setName("Inscripciones"); // NOI18N
@@ -107,6 +110,11 @@ public class vistaInscripciones extends javax.swing.JInternalFrame {
 
         jLabel1.setText("Filtrar");
 
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -114,42 +122,58 @@ public class vistaInscripciones extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 576, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
                         .addComponent(jTextField1)))
-                .addContainerGap())
+                .addGap(12, 12, 12))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(layout.createSequentialGroup()
+                .addGap(9, 9, 9)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(49, 49, 49))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 283, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jTextField1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jTextField1PropertyChange
-        // TODO add your handling code here:
-
-    }//GEN-LAST:event_jTextField1PropertyChange
 
     private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
         // TODO add your handling code here:
         filtrar();
     }//GEN-LAST:event_jTextField1KeyReleased
 
+    private void jTextField1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jTextField1PropertyChange
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1PropertyChange
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+        if (evt.getClickCount() == 2) {
+                    Inscripcion i = getInscripcion();
+        var fondo = this.getParent();
+        var vistaCargaNotas = new VistaCargaNota(i);
+
+        vistaCargaNotas.setVisible(true);
+        fondo.add(vistaCargaNotas);
+        fondo.repaint();
+
+        vistaCargaNotas.moveToFront();
+        vistaCargaNotas.setLocation(250, 100);
+        }
+    }//GEN-LAST:event_jTable1MouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
