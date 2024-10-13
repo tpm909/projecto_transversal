@@ -9,7 +9,7 @@ import javax.swing.JOptionPane;
 public class Conexion {
     private static String url = "jdbc:mariadb://localhost/universidadroma"; //Nombre de la BD
     private static String usuario = "root";
-    private static String password = "estudiante";
+    private static String password = "";
     private static Conexion conexion = null;
 
     private Conexion() { // única conexión - Singleton
