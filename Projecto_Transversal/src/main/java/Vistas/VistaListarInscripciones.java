@@ -13,7 +13,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author cisco
  */
-public class vistaInscripciones extends javax.swing.JInternalFrame {
+public class VistaListarInscripciones extends javax.swing.JInternalFrame {
 
     private InscripcionData repo = new InscripcionData();
     private List<Inscripcion> lista;
@@ -21,7 +21,7 @@ public class vistaInscripciones extends javax.swing.JInternalFrame {
     /**
      * Creates new form vistaInscripciones
      */
-    public vistaInscripciones() {
+    public VistaListarInscripciones() {
         initComponents();
         this.setTitle("Inscripciones");
         jTable1.setDefaultEditor(Object.class, null);

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Persistencia;
 
 import Modelo.Alumno;
@@ -15,11 +11,8 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
-/**
- *
- * @author Roma
- */
 public class InscripcionData {
     private Connection con;
     private MateriaData matData;
@@ -49,8 +42,9 @@ public class InscripcionData {
             ps.setDouble(4, insc.getNota());
             ps.executeUpdate();
             ps.close();
+            JOptionPane.showMessageDialog(null, "Inscripción fue realizada exitosamente.");
         } catch (SQLException ex) {
-            System.out.println("Error al guardar la inscripción: " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al guardar la inscripción: " + ex.getMessage());
         }
     }
 
@@ -75,7 +69,7 @@ public class InscripcionData {
 
             ps.close();
         } catch (SQLException ex) {
-            System.out.println("Error al obtener inscripciones: " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al obtener inscripciones: " + ex.getMessage());
         }
 
         return inscripciones;
@@ -102,7 +96,7 @@ public class InscripcionData {
 
             ps.close();
         } catch (SQLException ex) {
-            System.out.println("Error al obtener inscripciones por alumno: " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al obtener inscripciones por alumno: " + ex.getMessage());
         }
 
         return inscripciones;
@@ -120,8 +114,9 @@ public class InscripcionData {
 
             ps.executeUpdate();
             ps.close();
+            JOptionPane.showMessageDialog(null, "Nota actualizada correctamente.");
         } catch (SQLException ex) {
-            System.out.println("Error al actualizar la nota: " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al actualizar la nota: " + ex.getMessage());
         }
     }
 
@@ -147,7 +142,7 @@ public class InscripcionData {
 
             ps.close();
         } catch (SQLException ex) {
-            System.out.println("Error al obtener materias cursadas: " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al obtener materias cursadas: " + ex.getMessage());
         }
 
         return materias;
@@ -173,22 +168,24 @@ public class InscripcionData {
 
             ps.close();
         } catch (SQLException ex) {
-            System.out.println("Error al obtener materias no cursadas: " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al obtener materias no cursadas: " + ex.getMessage());
         }
 
         return materias;
     }   
 
-    public void borrarInscripcionMateriaAlumno(int id_inscripcion) {
-        String sql = "DELETE FROM inscripcion WHERE id_inscripcion = ?";
+    public void borrarInscripcionMateriaAlumno(int id_alumno, int id_materia) {
+        String sql = "DELETE FROM inscripcion WHERE id_alumno = ? AND id_materia = ?";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, id_inscripcion);
+            ps.setInt(1, id_alumno);
+            ps.setInt(2, id_materia);
             ps.executeUpdate();
             ps.close();
+            JOptionPane.showMessageDialog(null, "Inscripción fue anulada correctamente.");
         } catch (SQLException ex) {
-            System.out.println("Error al borrar la inscripción: " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al borrar la inscripción: " + ex.getMessage());
         }
     }
 
@@ -219,16 +216,13 @@ public class InscripcionData {
 
             ps.close();
         } catch (SQLException ex) {
-            System.out.println("Error al obtener alumnos por materia: " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al obtener alumnos por materia: " + ex.getMessage());
         }
 
         return alumnos;
     }
-
-
-    
 }
-  
+
 
 
 

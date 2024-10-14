@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -39,13 +40,12 @@ public class MateriaData {
             // Manejar claves generadas (si es necesario)
             ResultSet rs = ps.getGeneratedKeys();
                 if (rs.next()) {
-                 materia.setId_materia(rs.getInt(1));
-                    System.out.println("La materia ha sido agregada correctamente.");
+                    materia.setId_materia(rs.getInt(1));
+                    JOptionPane.showMessageDialog(null, "La materia ha sido agregada correctamente.");
             }
         
         } catch (SQLException e) {
-            System.out.println("Error al agregar la materia: " + e.getMessage());
-            e.printStackTrace(); 
+            JOptionPane.showMessageDialog(null, "Error al agregar la materia!");
         }
     }
     
@@ -73,7 +73,7 @@ public class MateriaData {
                 materia.setYear(rs.getString("year"));
                 materia.setEstado(rs.getBoolean("estado")); // Asignar el estado
             } else {
-                System.out.println("No se encontró una materia con el ID proporcionado.");
+                JOptionPane.showMessageDialog(null, "No se encontró una materia con el ID proporcionado.");
             }
         
             // Cerrar los recursos
@@ -81,7 +81,7 @@ public class MateriaData {
             ps.close();
         
         } catch (SQLException e) {
-            System.out.println("Error al buscar la materia: " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al buscar la materia!");
         }
 
         // Devolver materia encontrada (o null si no se encontró)
@@ -106,13 +106,15 @@ public class MateriaData {
 
             // Validar si se modificó alguna fila
             if (filasAfectadas > 0) {
-                System.out.println("Materia modificada exitosamente.");
+                JOptionPane.showMessageDialog(null, "Materia modificada exitosamente.");
+
             } else {
-                System.out.println("No existe materia con ese ID.");
+                JOptionPane.showMessageDialog(null, "No existe materia con ese ID.");
             }
 
         } catch (SQLException ex) {
-            System.out.println("Error al modificar la materia: " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al modificar la materia!");
+
         }
     }
 
@@ -120,7 +122,7 @@ public class MateriaData {
     public List<Materia> listarMateria(){
         ArrayList<Materia> listarMateria = new ArrayList<>();
         
-        String sql = "SELECT * FROM materia";
+        String sql = "SELECT * FROM Materia";
         
         try {
             // Preparar la consulta
@@ -145,14 +147,14 @@ public class MateriaData {
        
         
         } catch (SQLException ex) {
-            System.out.println("Error al obtener Materias: " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al obtener Materias!");
         }
     
         return listarMateria;
     }
     
-    public void darDeBajaMateria(String nombre_materia) { 
-    String sql = "UPDATE materia SET estado = ? WHERE nombre_materia = ?";
+    public void darDeBajaMateria(int id) { 
+    String sql = "UPDATE materia SET estado = ? WHERE id_Materia = ?";
     
         try {
             // Preparar la declaración SQL
@@ -162,26 +164,24 @@ public class MateriaData {
             ps.setBoolean(1, false);  // o puedes usar ps.setInt(1, 0);
         
             // Establecer el id de la materia para identificarlo
-            ps.setString(2, nombre_materia);
+            ps.setInt(2, id);
         
             // Ejecutar la actualización
             int filasAfectadas = ps.executeUpdate();
         
             // Verificar si se actualizó correctamente
             if (filasAfectadas > 0) {
-                System.out.println("La materia ha sido dada de baja correctamente.");
+                JOptionPane.showMessageDialog(null, "La materia ha sido dada de baja correctamente.");
             } else {
-                System.out.println("No se encontró la materia con el nombre proporcionado.");
-            }
-        
-                   
+                JOptionPane.showMessageDialog(null, "No se encontró la materia con el nombre proporcionado.");
+            }      
         } catch (SQLException e) {
-            System.out.println("Error al dar de baja la materia: " + e.getMessage());
+                JOptionPane.showMessageDialog(null, "Error al dar de baja la materia!");
         }
     }
     
-    public void darDeAltaMateria(String nombre_materia) { 
-    String sql = "UPDATE materia SET estado = ? WHERE nombre_materia = ?";
+    public void darDeAltaMateria(int id) { 
+    String sql = "UPDATE materia SET estado = ? WHERE id_materia = ?";
     
         try {
             // Preparar la declaración SQL
@@ -191,46 +191,61 @@ public class MateriaData {
             ps.setBoolean(1, true);  // o puedes usar ps.setInt(1, 0);
         
             // Establecer el id de la materia para identificarlo
-            ps.setString(2, nombre_materia);
+            ps.setInt(2, id);
         
             // Ejecutar la actualización
             int filasAfectadas = ps.executeUpdate();
         
             // Verificar si se actualizó correctamente
             if (filasAfectadas > 0) {
-                System.out.println("La materia ha sido dada de alta correctamente.");
+                JOptionPane.showMessageDialog(null, "La materia ha sido dada de alta correctamente.");
             } else {
-                System.out.println("No se encontró la materia con el nombre proporcionado.");
+                JOptionPane.showMessageDialog(null, "No se encontró la materia con el nombre proporcionado.");
             }
-        
-                   
         } catch (SQLException e) {
-            System.out.println("Error al dar de alta la materia: " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al dar de alta la materia!");
         }
-    }
-    public Materia obtenerMateriaPorId(int id) {
-        Materia materia = null;
-        String sql = "SELECT * FROM materia WHERE id_materia = ?";
-
-        try {
-            PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, id);
-            ResultSet rs = ps.executeQuery();
-
-            if (rs.next()) {
-                materia = new Materia();
-                materia.setId_materia(rs.getInt("id_materia"));
-                materia.setNombre_materia(rs.getString("nombre_materia"));
-                materia.setYear(rs.getString("year"));
-                
-            }
-
-            ps.close();
-        } catch (SQLException ex) {
-            System.out.println("Error al obtener la materia: " + ex.getMessage());
-        }
-
-        return materia;
     }
     
+    public void eliminarMateria(int id){ //No es recomendable borrar con el DELETE, despues no podemos recuperar los datos
+        try{
+            String sql = "DELETE FROM materia WHERE id_Materia = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id); // Reemplazamos el valor de la consulta (?)
+            int fila = ps.executeUpdate(); //Si se encuentra un materia con ese ID, Me va a mostrar la cantidad de filas afectadas, En este caso me deberia dar 1
+            
+            if(fila == 1){ //Si se encuentra, se eliminara
+                JOptionPane.showMessageDialog(null, "El materia fue eliminado de forma permanente correctamente!");
+            }else{
+                JOptionPane.showMessageDialog(null, "No se encontro ningun materia con el ID: "+id);
+            }
+            
+            }catch(SQLException ex){
+                JOptionPane.showMessageDialog(null, "Ocurrio un error al acceder a la tabla materia");
+            }
+        }
+    
+    public Materia obtenerMateriaPorId(int id) {
+            Materia materia = null;
+            String sql = "SELECT * FROM materia WHERE id_materia = ?";
+    
+            try {
+                PreparedStatement ps = con.prepareStatement(sql);
+                ps.setInt(1, id);
+                ResultSet rs = ps.executeQuery();
+    
+                if (rs.next()) {
+                    materia = new Materia();
+                    materia.setId_materia(rs.getInt("id_materia"));
+                    materia.setNombre_materia(rs.getString("nombre_materia"));
+                    materia.setYear(rs.getString("year"));
+                    
+                }
+    
+                ps.close();
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Error al obtener la materia!");
+            }    
+            return materia;
+        }
 }

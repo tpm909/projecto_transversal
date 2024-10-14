@@ -14,6 +14,7 @@ public class menu_principal extends javax.swing.JFrame {
      * Creates new form menu_principal
      */
     public menu_principal() {
+        
         initComponents();
     }
 
@@ -26,21 +27,125 @@ public class menu_principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+        fondo = new javax.swing.JDesktopPane();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        SeccionAlumno = new javax.swing.JMenuItem();
+        SeccionMateria = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        Inscripciones = new javax.swing.JMenuItem();
+        Notas = new javax.swing.JMenuItem();
+
+        jMenuItem1.setText("jMenuItem1");
+
+        jMenu4.setText("jMenu4");
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        javax.swing.GroupLayout fondoLayout = new javax.swing.GroupLayout(fondo);
+        fondo.setLayout(fondoLayout);
+        fondoLayout.setHorizontalGroup(
+            fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 951, Short.MAX_VALUE)
+        );
+        fondoLayout.setVerticalGroup(
+            fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 589, Short.MAX_VALUE)
+        );
+
+        jMenu1.setText("Sección");
+
+        SeccionAlumno.setText("Alumno");
+        SeccionAlumno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                abrir_menu(evt);
+            }
+        });
+        jMenu1.add(SeccionAlumno);
+
+        SeccionMateria.setText("Materia");
+        SeccionMateria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SeccionMateriaActionPerformed(evt);
+            }
+        });
+        jMenu1.add(SeccionMateria);
+
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Inscripción");
+
+        Inscripciones.setText("Inscripciones");
+        Inscripciones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                InscripcionesActionPerformed(evt);
+            }
+        });
+        jMenu2.add(Inscripciones);
+
+        Notas.setText("Notas");
+        Notas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NotasActionPerformed(evt);
+            }
+        });
+        jMenu2.add(Notas);
+
+        jMenuBar1.add(jMenu2);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(fondo)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(fondo)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void abrir_menu(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abrir_menu
+       fondo.removeAll();
+    fondo.repaint();
+    VistaAlumno A = new VistaAlumno();
+    A.setVisible(rootPaneCheckingEnabled);
+    fondo.add(A);
+    fondo.moveToFront(A); // TODO add your handling code here:
+    }//GEN-LAST:event_abrir_menu
+
+    private void InscripcionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InscripcionesActionPerformed
+    fondo.removeAll();
+    fondo.repaint();
+    VistaInscripcion A = new VistaInscripcion();
+    A.setVisible(rootPaneCheckingEnabled);
+    fondo.add(A);
+    fondo.moveToFront(A);  // TODO add your handling code here:
+    }//GEN-LAST:event_InscripcionesActionPerformed
+
+    private void SeccionMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SeccionMateriaActionPerformed
+    fondo.removeAll();
+    fondo.repaint();
+    VistaMateria A = new VistaMateria();
+    A.setVisible(rootPaneCheckingEnabled);
+    fondo.add(A);
+    fondo.moveToFront(A);  // TODO add your handling code here:
+    }//GEN-LAST:event_SeccionMateriaActionPerformed
+
+    private void NotasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NotasActionPerformed
+    fondo.removeAll();
+    fondo.repaint();
+    VistaListarInscripciones A = new VistaListarInscripciones();
+    A.setVisible(rootPaneCheckingEnabled);
+    fondo.add(A);
+    fondo.moveToFront(A);  // TODO add your handling code here:
+    }//GEN-LAST:event_NotasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -78,5 +183,15 @@ public class menu_principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem Inscripciones;
+    private javax.swing.JMenuItem Notas;
+    private javax.swing.JMenuItem SeccionAlumno;
+    private javax.swing.JMenuItem SeccionMateria;
+    private javax.swing.JDesktopPane fondo;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     // End of variables declaration//GEN-END:variables
 }
