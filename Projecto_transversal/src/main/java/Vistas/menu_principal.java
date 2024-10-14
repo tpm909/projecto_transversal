@@ -32,10 +32,8 @@ public class menu_principal extends javax.swing.JFrame {
         fondo = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
+        SeccionAlumno = new javax.swing.JMenuItem();
+        SeccionMateria = new javax.swing.JMenuItem();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -47,39 +45,32 @@ public class menu_principal extends javax.swing.JFrame {
         fondo.setLayout(fondoLayout);
         fondoLayout.setHorizontalGroup(
             fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 926, Short.MAX_VALUE)
+            .addGap(0, 951, Short.MAX_VALUE)
         );
         fondoLayout.setVerticalGroup(
             fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 402, Short.MAX_VALUE)
+            .addGap(0, 589, Short.MAX_VALUE)
         );
 
-        jMenu1.setText("Alumnos");
+        jMenu1.setText("Sección");
 
-        jMenuItem2.setText("Administrar");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        SeccionAlumno.setText("Alumno");
+        SeccionAlumno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 abrir_menu(evt);
             }
         });
-        jMenu1.add(jMenuItem2);
+        jMenu1.add(SeccionAlumno);
 
-        jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("Materias");
-
-        jMenuItem4.setText("Administrar");
-        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+        SeccionMateria.setText("Materia");
+        SeccionMateria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem4ActionPerformed(evt);
+                SeccionMateriaActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem4);
+        jMenu1.add(SeccionMateria);
 
-        jMenuBar1.add(jMenu2);
-
-        jMenu3.setText("Inscripcion");
-        jMenuBar1.add(jMenu3);
+        jMenuBar1.add(jMenu1);
 
         setJMenuBar(jMenuBar1);
 
@@ -106,14 +97,14 @@ public class menu_principal extends javax.swing.JFrame {
     fondo.moveToFront(A); // TODO add your handling code here:
     }//GEN-LAST:event_abrir_menu
 
-    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-          fondo.removeAll();
+    private void SeccionMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SeccionMateriaActionPerformed
+    fondo.removeAll();
     fondo.repaint();
     VistaMateria A = new VistaMateria();
     A.setVisible(rootPaneCheckingEnabled);
     fondo.add(A);
     fondo.moveToFront(A);  // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem4ActionPerformed
+    }//GEN-LAST:event_SeccionMateriaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -151,14 +142,12 @@ public class menu_principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem SeccionAlumno;
+    private javax.swing.JMenuItem SeccionMateria;
     private javax.swing.JDesktopPane fondo;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem4;
     // End of variables declaration//GEN-END:variables
 }
