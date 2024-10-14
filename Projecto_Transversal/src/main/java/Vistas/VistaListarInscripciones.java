@@ -178,7 +178,7 @@ public class VistaListarInscripciones extends javax.swing.JInternalFrame {
 
         vistaCargaNotas.moveToFront();
         vistaCargaNotas.setLocation(250, 100);
-        }
+        }        
     }//GEN-LAST:event_jTable1MouseClicked
 
 

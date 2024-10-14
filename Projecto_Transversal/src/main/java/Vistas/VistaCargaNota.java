@@ -134,7 +134,7 @@ public class VistaCargaNota extends javax.swing.JInternalFrame {
                 nota);
         JOptionPane.showMessageDialog(this, "Nota cargada.");
         List.of(this.getParent().getComponents()).forEach(component -> {
-            if (component.getClass().getSimpleName().toString().equals("vistaInscripciones")) {
+            if (component instanceof VistaListarInscripciones) {
                 VistaListarInscripciones x = (VistaListarInscripciones) component;
                 x.actualizarTabla();
             }

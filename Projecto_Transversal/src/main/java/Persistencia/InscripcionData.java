@@ -114,7 +114,6 @@ public class InscripcionData {
 
             ps.executeUpdate();
             ps.close();
-            JOptionPane.showMessageDialog(null, "Nota actualizada correctamente.");
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al actualizar la nota: " + ex.getMessage());
         }
